@@ -11,7 +11,7 @@ logging.basicConfig(
 )
 
 print("At least this")
-database = MongoClient("mongodb://172.28.16.1:27017").db1
+database = MongoClient("mongodb://host.docker.internal:27017").db1
 RUNNING = True
 dblock = threading.Lock()
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
