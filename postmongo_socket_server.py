@@ -17,9 +17,10 @@ sock.bind(('127.0.0.1',5050))
 sock.settimeout(2)
 sock.listen(5)
 BUFFER_MAX = 1024
+data_count = 0
 
 def handler(c,counter):
-    global RUNNING
+    global RUNNING, data_count
     data = b''
     while True:
         recv = c.recv(BUFFER_MAX)
@@ -32,8 +33,9 @@ def handler(c,counter):
     collection_name = payload['table'].lower()
     data = payload['data']
     logging.info(f'{counter} -- {len(data)}')
-    print(len(data))
     with dblock:
+        data_count += len(data)
+        print(data_count)
         collection = database[collection_name]
         collection.insert_many(data)
 
@@ -48,4 +50,4 @@ while RUNNING:
         except socket.error:
             pass
     except KeyboardInterrupt:
-        RUNNING = False
+        break
