@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net" modified="2023-12-04T23:11:43.418Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="FtsWzFuWO5VQYfnVSU4Y" version="22.1.5" type="device">
+  <diagram name="Page-1" id="p57yfi8ab-16wlWv7-Oc">
+    <mxGraphModel dx="1088" dy="540" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MiACZ_dvXbF9Jr5q8t37-2" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Servidor&lt;/font&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="80" width="340" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="MiACZ_dvXbF9Jr5q8t37-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MiACZ_dvXbF9Jr5q8t37-1" target="MiACZ_dvXbF9Jr5q8t37-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MiACZ_dvXbF9Jr5q8t37-1" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Cliente&lt;/font&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="340" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="MiACZ_dvXbF9Jr5q8t37-3" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Postgres&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="145" y="400" width="150" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="MiACZ_dvXbF9Jr5q8t37-4" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;MongoDB&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="575" y="400" width="150" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="MiACZ_dvXbF9Jr5q8t37-6" value="Socket" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="118" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MiACZ_dvXbF9Jr5q8t37-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="MiACZ_dvXbF9Jr5q8t37-2" target="MiACZ_dvXbF9Jr5q8t37-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MiACZ_dvXbF9Jr5q8t37-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="MiACZ_dvXbF9Jr5q8t37-1" target="MiACZ_dvXbF9Jr5q8t37-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

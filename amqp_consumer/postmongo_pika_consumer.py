@@ -71,9 +71,7 @@ channel.exchange_declare(
 channel.queue_declare(queue="standard", auto_delete=True)
 channel.queue_bind(
     queue="standard", exchange="test_exchange", routing_key="standard_key")
-# Note: prefetch is set to 1 here as an example only and to keep the number of threads created
-# to a reasonable amount. In production you will want to test with different prefetch values
-# to find which one provides the best performance and usability for your solution
+
 channel.basic_qos(prefetch_count=1)
 
 threads = []

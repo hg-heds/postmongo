@@ -1,6 +1,8 @@
 import socket, json, threading, logging
 from pymongo import MongoClient
 from os import chdir, path 
+
+
 chdir(path.dirname(path.abspath(__file__)))
 logging.basicConfig(
     filename = 'postmongo_socket.log',
@@ -10,7 +12,6 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
-print("At least this")
 database = MongoClient("mongodb://host.docker.internal:27017").db1
 RUNNING = True
 dblock = threading.Lock()
@@ -43,6 +44,7 @@ def handler(c,counter):
         print(data_count)
         collection = database[collection_name]
         collection.insert_many(data)
+    return
 
 counter = 0
 print("Started")
