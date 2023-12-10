@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# pylint: disable=C0111,C0103,R0205
-
 import functools
 import logging
 import threading
@@ -55,10 +52,8 @@ def on_message(ch, method_frame, _header_frame, body, args):
 
 
 credentials = pika.PlainCredentials('guest', 'guest')
-# Note: sending a short heartbeat to prove that heartbeats are still
-# sent even though the worker simulates long-running work
 parameters = pika.ConnectionParameters(
-    'localhost', credentials=credentials, heartbeat=5)
+    'host.docker.internal', credentials=credentials, heartbeat=5)
 connection = pika.BlockingConnection(parameters)
 
 channel = connection.channel()
@@ -70,13 +65,17 @@ channel.exchange_declare(
     auto_delete=False)
 channel.queue_declare(queue="standard", auto_delete=True)
 channel.queue_bind(
-    queue="standard", exchange="test_exchange", routing_key="standard_key")
+    queue="standard", 
+    exchange="test_exchange", 
+    routing_key="standard_key")
 
 channel.basic_qos(prefetch_count=1)
 
 threads = []
 on_message_callback = functools.partial(on_message, args=(threads))
-channel.basic_consume(on_message_callback=on_message_callback, queue='standard')
+channel.basic_consume(
+    on_message_callback=on_message_callback, 
+    queue='standard')
 
 try:
     channel.start_consuming()
