@@ -1,12 +1,16 @@
 import functools, logging, threading, json, pika
 from pika.exchange_type import ExchangeType
 from pymongo import MongoClient
+from time import sleep
 
-LOG_FORMAT = ('%(levelname) -10s %(asctime)s %(name) -30s %(funcName) '
-              '-35s %(lineno) -5d: %(message)s')
-LOGGER = logging.getLogger(__name__)
+logging.basicConfig(
+    filename = 'postmongo_amqp.log',
+    encoding = 'utf-8',
+    format = '%(levelname)s @ %(asctime)s.%(msecs)03d # %(message)s',
+    level = 21,
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 
-logging.basicConfig(level=logging.ERROR, format=LOG_FORMAT)
 
 database = MongoClient("mongodb://localhost:27017").db1
 dblock = threading.Lock()
@@ -21,26 +25,22 @@ def ack_message(ch, delivery_tag):
 
 
 def do_work(ch, delivery_tag, body):
-    thread_id = threading.get_ident()
-    LOGGER.info('Thread id: %s Delivery tag: %s Message body: %s', 
-                thread_id,
-                delivery_tag, body)
+    cb = functools.partial(ack_message, ch, delivery_tag)
+    ch.connection.add_callback_threadsafe(cb)
     payload = json.loads(body.decode('utf-8'))
     collection_name = payload['table'].lower()
     data = payload['data']
-    print(len(data))
+    logging.log(21,len(data))
     with dblock:
         collection = database[collection_name]
         collection.insert_many(data)
-    cb = functools.partial(ack_message, ch, delivery_tag)
-    ch.connection.add_callback_threadsafe(cb)
+    logging.log(22,len(data))
 
 
 def on_message(ch, method_frame, _header_frame, body, args):
     thrds = args
     delivery_tag = method_frame.delivery_tag
-    t = threading.Thread(target=do_work, 
-                         args=(ch, delivery_tag, body))
+    t = threading.Thread(target=do_work, args=(ch, delivery_tag, body))
     t.start()
     thrds.append(t)
 

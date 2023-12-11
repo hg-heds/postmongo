@@ -19,7 +19,8 @@ connection = psycopg2.connect(
     port='5432'
 )
 
-cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+cursor = connection.cursor(
+    cursor_factory=psycopg2.extras.RealDictCursor)
 cursor.execute('select * from "METODO"')
 while True:
     sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -29,7 +30,10 @@ while True:
     if not res: 
         sock.close()
         break
-    sock.send(json.dumps({'table':'METODO','data':[dict(row) for row in res]}).encode('utf-8')+b':::')
+    sock.send(json.dumps({
+            'table':'METODO',
+            'data':[dict(row) for row in res]
+        }).encode('utf-8')+b':::')
     sock.close()
     
 cursor.close()

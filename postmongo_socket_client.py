@@ -6,7 +6,7 @@ cursor.execute('select * from "METODO"')
 while True:
     sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     sock.connect(('127.0.0.1',5050))
-    res = cursor.fetchmany(10000)
+    res = cursor.fetchmany(1000)
     if not res: 
         sock.close()
         break

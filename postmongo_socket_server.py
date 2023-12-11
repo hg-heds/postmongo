@@ -4,8 +4,8 @@ from pymongo import MongoClient
 logging.basicConfig(
     filename = 'postmongo_socket.log',
     encoding = 'utf-8',
-    format = '%(levelname)s @ %(asctime)s # %(message)s',
-    level = logging.INFO,
+    format = '%(levelname)s @ %(asctime)s.%(msecs)03d # %(message)s',
+    level = 21,
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
@@ -27,27 +27,20 @@ def handler(c,counter):
         data += recv
         if data[-3:] == b':::': break
     payload = json.loads(data.decode('utf-8')[:-3])
-    if 'table' not in payload:
-        RUNNING = False
-        return
     collection_name = payload['table'].lower()
     data = payload['data']
-    logging.info(f'{counter} -- {len(data)}')
+    logging.log(21,len(data))
     with dblock:
-        data_count += len(data)
-        print(data_count)
         collection = database[collection_name]
         collection.insert_many(data)
+    logging.log(22,len(data))
 
 counter = 0
 while RUNNING:
+
     try:
-        try:
-            c, addr = sock.accept() 
-            print(addr)  
-            counter += 1
-            threading.Thread(target=handler, args=(c,counter)).start()
-        except socket.error:
-            pass
-    except KeyboardInterrupt:
-        break
+        c, addr = sock.accept() 
+        counter += 1
+        threading.Thread(target=handler, args=(c,counter)).start()
+    except socket.error:
+        pass
