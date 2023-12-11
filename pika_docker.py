@@ -5,7 +5,6 @@ import json
 import pika
 from pika.exchange_type import ExchangeType
 from pymongo import MongoClient
-from time import sleep
 
 logging.basicConfig(
     filename = 'postmongo_amqp.log',
@@ -16,12 +15,12 @@ logging.basicConfig(
 )
 
 
-database = MongoClient("mongodb://localhost:27017").db1
+database = MongoClient("mongodb://host.docker.internal:27017").db1
 dblock = threading.Lock()
 
 
 def ack_message(ch, delivery_tag):
-    
+
     if ch.is_open:
         ch.basic_ack(delivery_tag)
     else:
@@ -51,7 +50,7 @@ def on_message(ch, method_frame, _header_frame, body, args):
 
 credentials = pika.PlainCredentials('guest', 'guest')
 parameters = pika.ConnectionParameters(
-    'localhost', credentials=credentials, heartbeat=5)
+    'host.docker.internal', credentials=credentials, heartbeat=5)
 connection = pika.BlockingConnection(parameters)
 
 channel = connection.channel()

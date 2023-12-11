@@ -1,6 +1,7 @@
 import socket, json, threading, logging
 from pymongo import MongoClient
-
+from os import chdir,path 
+chdir(path.dirname(path.abspath(__file__)))
 logging.basicConfig(
     filename = 'postmongo_socket.log',
     encoding = 'utf-8',
