@@ -6,7 +6,7 @@ from pika import DeliveryMode
 from pika.exchange_type import ExchangeType
 
 
-postgres = psycopg2.connect(password='hughes@422', 
+postgres = psycopg2.connect(password='SENHA', 
                             database='postgres', 
                             host='host.docker.internal', 
                             user='postgres', 

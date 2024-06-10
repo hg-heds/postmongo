@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<senv:Envelope xmlns:tns="spyne.examples.hello.soap" xmlns:senv="http://schemas.xmlsoap.org/soap/envelope/">
+<senv:Header> <RequestHeader>
+</RequestHeader>
+</senv:Header>
+<senv:Body>
+<tns:say_hello>
+<tns:times>3</tns:times>
+</tns:say_hello>
+</senv:Body>
+</senv:Envelope> 

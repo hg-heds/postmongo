@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<soap11env:Envelope xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="spyne.examples.hello.soap"><soap11env:Body><tns:say_helloResponse><tns:say_helloResult><tns:string>nisi ut aliquip ex ea commodo </tns:string><tns:string>magna aliqua. Ut enim ad minim </tns:string><tns:string>dolor in reprehenderit in </tns:string></tns:say_helloResult></tns:say_helloResponse></soap11env:Body></soap11env:Envelope>
